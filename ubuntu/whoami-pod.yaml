@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: whoami-pod
+  labels:
+    app: whoami
+spec:
+  containers:
+  - name: whoami
+    image: subicura/whoami:1

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pod-jenkins
+  name: pod-jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-jenkins
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pod-jenkins
+    spec:
+      containers:
+      - image: bibinwilson/jenkins
+        name: jenkins
+        ports:
+        - containerPort: 8080

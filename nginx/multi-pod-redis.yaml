@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod
+  labels:
+    app: redis
+spec:
+  containers:
+  - name: counter-container
+    image: ghcr.io/subicura/counter:latest
+    env:
+      - name: REDIS_HOST
+        value: 'localhost'
+  - name: redis-container
+    image: redis

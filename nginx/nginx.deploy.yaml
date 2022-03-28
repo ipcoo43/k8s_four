@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: # 3가지 필수 요소 중 하나
+  name: nginx-deployment # 해당 이름으로 deployment가 생성된다.
+  labels: # 하나의 object
+    app: nginx  # key-Value로 지정 한다.
+spec: # 3가지 필수 구성 요소 중 하나 specification, 나머지 하니 status
+  replicas: 3 # 3개의 replica pod 를 생성 한다
+  selector:  # deployment가 관리 할 pod를 찾는 방법을 정의 
+    matchLabels: # matchLabels가
+      app: nginx # nginx인 pod deployment가 관리 한다.
+  template:
+    metadata:
+      labels:  
+        app: nginx # pod는 .metadata.labels field를 사용 app: nginx라는 label을 붙인다.
+        # 향후 어느 리소스가 이 app 값을 deployment를 참고려할 때 필요한 값을 지정ㅈ해주기 위한 것이다.
+    spec:
+      containers:
+      - name: nginx-container  # container 1개를 생성, .spec.template.spec.containers[0].name field를 사용해서 nginx라는 이름을 붙인다.
+        image: nginx # pod가 docker hub의 nginx image를 실행하는 nginx container 1개를 실행하는 것을 나타낸다.
+        ports:
+        - containerPort: 80

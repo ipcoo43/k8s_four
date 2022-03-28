@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: whoami-pod-rp
+  labels:
+    app: whoami
+spec:
+  containers:
+  - name: whoami
+    image: subicura/whoami:1
+    readinessProbe:
+      httpGet:
+        path: /not/exist
+        port: 8080
+      initialDelaySeconds: 5
+      timeoutSeconds: 2
+      periodSecond: 5
+      failureThreshold: 1

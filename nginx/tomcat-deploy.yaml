@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomcat
+  template:
+    metadata:
+      labels:
+        app: tomcat
+    spec:
+      containers:
+      - name: tomcat-container
+        image: tomcat:9.0
+        ports:
+        - containerPort: 8080
+      # nodeSelector: # nodeSelector는 image를 가져다가 설치 할 때 node에 ssd에 설치하라고 지정하는 selector 이다.
+        # storageType: ssd
