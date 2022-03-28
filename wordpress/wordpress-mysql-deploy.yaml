@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-mysql-pod
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: wordpress
+      tier: mysql
+  template:
+    metadata: 
+      labels:
+        app: wordpress
+        tier: mysql
+    spec:
+      containers:
+      - name: mysql-container
+        image: mariadb:10.7
+        env:
+          - name: MYSQL_DATABASE
+            value: wordpress
+          - name: MYSQL_ROOT_PASSWORD
+            value: password
+        ports:
+          - containerPort: 3306
+            name: mysql
